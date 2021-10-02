@@ -20,6 +20,7 @@ class StageService: BaseServiceProtocol {
                 completed(.failure(.invalidResponse))
                 return
             }
+            
             guard let data = data else { return }
             guard let decodedValue = try? self.decodeJsonErrors(ApiSingleResult<T>.self, data) else {
                 completed(.failure(.invalidData))

@@ -92,4 +92,18 @@ extension Endpoint {
     }
     
     
+    static func teams(countryId id: Int) -> Self {
+        return Endpoint(path: "api/v1/soccer/teams",
+                        queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key),URLQueryItem(name: "country_id", value: String(id))],
+                        method: "GET",
+                        headers: ["Content-Type" : "application/json"])
+    }
+    
+    static func team(teamId id: Int) -> Self {
+        return Endpoint(path: "api/v1/soccer/teams/\(id)",
+                        queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key)],
+                        method: "GET",
+                        headers: ["Content-Type" : "application/json"])
+    }
+    
 }

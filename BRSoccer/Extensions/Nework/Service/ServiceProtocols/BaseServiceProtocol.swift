@@ -11,14 +11,11 @@ protocol BaseServiceProtocol {
       
     associatedtype T:Codable
     
-    
     func get(id: Int,using session: URLSession, completed: @escaping(Result<T,CustomErrors>) -> Void)
     
     func getAll(fatherId: Int,using session: URLSession, completed: @escaping(Result<[T],CustomErrors>) -> Void)
     
 }
-
-
 
 
 extension BaseServiceProtocol {

@@ -7,12 +7,17 @@
 
 import Foundation
 
+struct Championship {
+     static let Brasileirao = 693
+     static let CopaDoBrasil =  696
+  }
+
 class LeagueService : BaseServiceProtocol {
     
     //typealias LeagueResult = ApiResult<League>
     
     static let shared = LeagueService()
-
+    
     typealias T = League
     
     func get(id: Int,using session: URLSession = .shared, completed: @escaping (Result<T, CustomErrors>) -> Void) {
@@ -50,5 +55,5 @@ class LeagueService : BaseServiceProtocol {
             let resultObjects = decodedValue.data.values.map { $0 }
             completed(.success(resultObjects))
         }
-    }
+    }    
 }

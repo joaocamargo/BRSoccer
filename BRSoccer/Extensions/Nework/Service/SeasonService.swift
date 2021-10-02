@@ -41,11 +41,11 @@ class SeasonService: BaseServiceProtocol {
             }
             
             guard let data = data else { return }
-            guard let decodedValue = try? self.decodeJsonErrors(ApiResultsAsDictionary<T>.self, data) else {
+            guard let decodedValue = try? self.decodeJsonErrors(ApiResultsAsArray<T>.self, data) else {
                 completed(.failure(.invalidData))
                 return
             }
-            let resultObjects = decodedValue.data.values.map { $0 }
+            let resultObjects = decodedValue.data.map { $0 }
             completed(.success(resultObjects))
         }
     }
