@@ -1,25 +1,22 @@
 //
-//  SeasonService.swift
-//  StudyPlayGrounds
+//  MatchesService.swift
+//  BRSoccer
 //
-//  Created by joao camargo on 29/09/21.
+//  Created by joao camargo on 03/10/21.
 //
 
 import Foundation
 
-struct SeasonEnum {
-     static let Brasileirao2021 = 1905     
-  }
-
-
-class SeasonService: BaseServiceProtocol {
+class MatchesService : BaseServiceProtocol {
     
-    static let shared = SeasonService()
-
-    typealias T = Season
+    //typealias LeagueResult = ApiResult<League>
+    
+    static let shared = MatchesService()
+    
+    typealias T = Match
     
     func get(id: Int,using session: URLSession = .shared, completed: @escaping (Result<T, CustomErrors>) -> Void) {
-        session.request(endpoint: .season(seasonId: id)) {  data, response, error in
+        session.request(endpoint: .matche(matchId: id)) {  data, response, error in
 
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completed(.failure(.invalidResponse))
@@ -35,11 +32,10 @@ class SeasonService: BaseServiceProtocol {
         }
     }
     
-    //father == leagueId
     func getAll(fatherId id: Int,using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
-        print(Endpoint.seasons(leagueId: id).url)
+        //print(Endpoint.leagues(countryId: id).url)
         
-        session.request(endpoint: .seasons(leagueId: id)) {  data, response, error in
+        session.request(endpoint: .matches(seasonId: id)) {  data, response, error in
 
             guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
                 completed(.failure(.invalidResponse))
@@ -51,6 +47,7 @@ class SeasonService: BaseServiceProtocol {
                 completed(.failure(.invalidData))
                 return
             }
+            
             let resultObjects = decodedValue.data.map { $0 }
             completed(.success(resultObjects))
         }

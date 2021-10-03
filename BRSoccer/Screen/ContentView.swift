@@ -26,13 +26,16 @@ struct ContentView: View{
                         ProgressView()
                     }.frame(height: 140)
                 } else {
-                    TeamLogosMenu(teams: teams).frame(height: 140)
+                    VStack(alignment: .trailing,spacing: 2) {
+                        Text("Equipes da primeira divisão").font(.system(size: 10, weight: .semibold))
+                        TeamLogosMenu(teams: teams).frame(height: 140)
+                    }.padding()
                 }
                 UndergoingMatchesView()
             }
             .onAppear {
                 isLoading = true
-                TeamService.shared.getAll(fatherId: 25) { result in
+                TeamService.shared.getBrasilianFirstDivisionTeams() { result in
                     isLoading = false
                     switch result {
                     case .success(let teams):
@@ -59,16 +62,6 @@ struct TeamLogosMenu: View {
                     
                     VStack(spacing: 10) {
                         ImageRow(model: teamItem)
-                            //.resizable()
-                          /*  .background(Color.white)
-                            .clipShape(Circle())
-                            .frame(width: 60, height: 60)
-                            .overlay(Circle().stroke(Color.white,lineWidth:4).shadow(radius: 10))*/
-//
-//                            .frame(width: 60, height: 60, alignment: .center)
-//                            .clipShape(Circle())
-//                            .shadow(color: Color.gray, radius: 10, x: 5, y: 5)
-                             //.overlay(Circle().stroke(Color.white, lineWidth: 4))
                         Text("\(teamItem.shortCode)")
                     }
                 }

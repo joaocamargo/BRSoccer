@@ -8,46 +8,81 @@
 import Foundation
 
 class TeamService: BaseServiceProtocol {
-        
-        static let shared = TeamService()
-
-        typealias T = Team
-        
-        func get(id: Int,using session: URLSession = .shared, completed: @escaping (Result<T, CustomErrors>) -> Void) {
-            session.request(endpoint: .team(teamId: id)) {  data, response, error in
-
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completed(.failure(.invalidResponse))
-                    return
-                }
-                
-                guard let data = data else { return }
-                guard let decodedValue = try? self.decodeJsonErrors(ApiSingleResult<T>.self, data) else {
-                    completed(.failure(.invalidData))
-                    return
-                }
-                let result = decodedValue.data
-                completed(.success(result))
+    
+    static let shared = TeamService()
+    
+    typealias T = Team
+    
+    func get(id: Int,using session: URLSession = .shared, completed: @escaping (Result<T, CustomErrors>) -> Void) {
+        session.request(endpoint: .team(teamId: id)) {  data, response, error in
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
             }
-        }
-        
-        func getAll(fatherId id: Int,using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
-            session.request(endpoint: .teams(countryId: id)) {  data, response, error in
-
-                guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
-                    completed(.failure(.invalidResponse))
-                    return
-                }
-                
-                guard let data = data else { return }
-                guard let decodedValue = try? self.decodeJsonErrors(ApiResultsAsArray<T>.self, data) else {
-                    completed(.failure(.invalidData))
-                    return
-                }
-                let resultObjects = decodedValue.data.map { $0 }
-                completed(.success(resultObjects))
+            
+            guard let data = data else { return }
+            guard let decodedValue = try? self.decodeJsonErrors(ApiSingleResult<T>.self, data) else {
+                completed(.failure(.invalidData))
+                return
             }
+            let result = decodedValue.data
+            completed(.success(result))
         }
     }
+    
+    func getAll(fatherId id: Int,using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
+        session.request(endpoint: .teams(countryId: id)) {  data, response, error in
+            
+            guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                completed(.failure(.invalidResponse))
+                return
+            }
+            
+            guard let data = data else { return }
+            guard let decodedValue = try? self.decodeJsonErrors(ApiResultsAsArray<T>.self, data) else {
+                completed(.failure(.invalidData))
+                return
+            }
+            let resultObjects = decodedValue.data.map { $0 }
+            completed(.success(resultObjects))
+        }
+    }
+    
+    
+    func getBrasilianFirstDivisionTeams(using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
+        
+        SeasonService.shared.getAll(fatherId: LeagueEnum.Brasileirao) { result in
+            switch result{
+            case .success(let seasons):
+                guard let season =  (seasons.first { $0.isCurrent == 1}) else { return }
+                //agora tenho todas a season, com a season eu posso chegar nos jogos
+
+                MatchesService.shared.getAll(fatherId: season.id) { resultMatches in
+                    switch resultMatches {
+                    case .success(let matches):
+                        //com os jogos eu posso retornar os times
+                        let allTeamsFirstLeague = matches.map { $0.homeTeam }
+                        
+                        let uniqueTeamsFirstLeague = allTeamsFirstLeague.unique(map: { $0.id })
+     
+                        completed(.success(uniqueTeamsFirstLeague))
+                        
+                        
+                    case .failure(let failure):
+                        completed(.failure(failure))
+                    }
+                }
+                
+                
+            case .failure(let failure):
+                completed(.failure(failure))
+            }
+        }
+        
+        
+    }
+    
+}
 
 

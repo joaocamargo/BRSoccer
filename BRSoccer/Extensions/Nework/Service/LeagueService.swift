@@ -7,7 +7,7 @@
 
 import Foundation
 
-struct Championship {
+struct LeagueEnum {
      static let Brasileirao = 693
      static let CopaDoBrasil =  696
   }

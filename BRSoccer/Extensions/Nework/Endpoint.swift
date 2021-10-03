@@ -106,4 +106,24 @@ extension Endpoint {
                         headers: ["Content-Type" : "application/json"])
     }
     
+    
+    static func matches(seasonId id: Int, dateFrom: String = "2021-09-01",dateTo: String = "2021-09-20") -> Self {
+        return Endpoint(path: "api/v1/soccer/matches",
+                        queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key),
+                                      URLQueryItem(name: "season_id", value: String(id)),
+                                      URLQueryItem(name: "date_from", value: dateFrom),
+                                      URLQueryItem(name: "date_to", value: dateTo)
+                                    ],
+                        method: "GET",
+                        headers: ["Content-Type" : "application/json"])
+    }
+    
+    
+    static func matche(matchId id: Int, dateFrom: String = "2021-01-01") -> Self {
+        return Endpoint(path: "api/v1/soccer/matches/\(id)",
+                        queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key)],
+                        method: "GET",
+                        headers: ["Content-Type" : "application/json"])
+    }
+    
 }
