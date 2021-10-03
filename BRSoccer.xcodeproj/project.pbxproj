@@ -12,7 +12,7 @@
 		055B883D27087EC500615827 /* TeamService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B883C27087EC500615827 /* TeamService.swift */; };
 		055B883F2708846600615827 /* ImageService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B883E2708846600615827 /* ImageService.swift */; };
 		055B88412708863600615827 /* RemoteImageURL.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B88402708863600615827 /* RemoteImageURL.swift */; };
-		055B884827088BB700615827 /* ImageViewContainer.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B884727088BB700615827 /* ImageViewContainer.swift */; };
+		055B884827088BB700615827 /* ImageRoundedSymbols.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B884727088BB700615827 /* ImageRoundedSymbols.swift */; };
 		055B884A27088BFD00615827 /* ImageRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B884927088BFD00615827 /* ImageRow.swift */; };
 		057887BC270730BA00D2BF7D /* Config.json in Resources */ = {isa = PBXBuildFile; fileRef = 057887BB270730BA00D2BF7D /* Config.json */; };
 		057887C32707342700D2BF7D /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057887C12707342700D2BF7D /* Data+Ext.swift */; };
@@ -63,7 +63,7 @@
 		055B883C27087EC500615827 /* TeamService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TeamService.swift; sourceTree = "<group>"; };
 		055B883E2708846600615827 /* ImageService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageService.swift; sourceTree = "<group>"; };
 		055B88402708863600615827 /* RemoteImageURL.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImageURL.swift; sourceTree = "<group>"; };
-		055B884727088BB700615827 /* ImageViewContainer.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageViewContainer.swift; sourceTree = "<group>"; };
+		055B884727088BB700615827 /* ImageRoundedSymbols.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRoundedSymbols.swift; sourceTree = "<group>"; };
 		055B884927088BFD00615827 /* ImageRow.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ImageRow.swift; sourceTree = "<group>"; };
 		057887BB270730BA00D2BF7D /* Config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Config.json; sourceTree = "<group>"; };
 		057887C12707342700D2BF7D /* Data+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
@@ -155,7 +155,7 @@
 		055B884627088BA000615827 /* Image */ = {
 			isa = PBXGroup;
 			children = (
-				055B884727088BB700615827 /* ImageViewContainer.swift */,
+				055B884727088BB700615827 /* ImageRoundedSymbols.swift */,
 				055B884927088BFD00615827 /* ImageRow.swift */,
 			);
 			path = Image;
@@ -414,7 +414,7 @@
 				057887D02707348400D2BF7D /* BaseServiceProtocol.swift in Sources */,
 				055B883927087D8300615827 /* Team.swift in Sources */,
 				057887C32707342700D2BF7D /* Data+Ext.swift in Sources */,
-				055B884827088BB700615827 /* ImageViewContainer.swift in Sources */,
+				055B884827088BB700615827 /* ImageRoundedSymbols.swift in Sources */,
 				057887E4270735D500D2BF7D /* ApiResult.swift in Sources */,
 				05794AA7270727A8006CEEF5 /* ContentView.swift in Sources */,
 				057887C92707346C00D2BF7D /* Config.swift in Sources */,

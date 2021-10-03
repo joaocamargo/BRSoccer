@@ -11,7 +11,7 @@ struct ImageRow: View {
     let model: Team
     var body: some View {
         VStack(alignment: .center) {
-            ImageViewContainer(imageUrl: model.logo)
+            ImageRoundedSymbols(imageUrl: model.logo)               
         }
     }
 }
