@@ -19,6 +19,11 @@ struct Team: Codable, Identifiable {
     let commonName: String?
     let logo: String
     let country: Country
+    
+    
+    var nameToShow : String {
+        return commonName != nil && commonName != "" ? commonName! : name
+    }
 
     enum CodingKeys: String, CodingKey {
         case teamID = "team_id"

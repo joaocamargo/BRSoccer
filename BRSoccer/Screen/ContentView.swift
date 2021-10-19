@@ -27,7 +27,7 @@ struct ContentView: View{
                     }.frame(height: 140)
                 } else {
                     VStack(alignment: .trailing,spacing: 2) {
-                        Text("Equipes da primeira divisão").font(.system(size: 10, weight: .semibold))
+                        Text("Equipes da primeira divisão").font(.system(size: 12, weight: .semibold))
                         TeamLogosMenu(teams: teams).frame(height: 140)
                     }.padding()
                 }
@@ -45,7 +45,7 @@ struct ContentView: View{
                         print(error.localizedDescription)
                     }
                 }
-            }
+            }.navigationTitle("BRSoccer")
         }.navigationViewStyle(.stack)
     }
 }
@@ -54,24 +54,25 @@ struct ContentView: View{
 struct TeamLogosMenu: View {
     
     var teams: [Team]
-    
     var body: some View {
         ScrollView(.horizontal, showsIndicators: false) {
             HStack(spacing: 20){
                 ForEach(teams) { teamItem in
-                    
                     VStack(spacing: 10) {
                         ImageRow(model: teamItem)
                         Text("\(teamItem.shortCode)")
                     }
                 }
             }.padding()
-        }.navigationTitle("BRSoccer")
+        }
     }
 }
 
 
 struct UndergoingMatchesView: View {
+    
+    @State var matches = [Match]()
+    
     var body: some View {
         VStack{
             HStack {
@@ -82,16 +83,72 @@ struct UndergoingMatchesView: View {
                 .padding(.top)
             
             ScrollView(.horizontal) {
-                HStack(spacing: 8) {
-                    ForEach(0..<5, id: \.self) { num in
-                        Spacer()
-                            .frame(width: 125, height: 150)
+                if matches.count > 0 {
+                    HStack(spacing: 8) {
+                        ForEach(matches) { match in
+                            VStack(alignment: .center){
+                                
+                                HStack(alignment: .center,spacing: 0) {
+                                    VStack {
+                                        RemoteImage(imageUrl: match.homeTeam.logo,width: 80, height: 80)
+                                        Text("\(match.stats.homeScore)")
+                                            .font(.system(size: 18, weight: .semibold))
+                                            .padding(.horizontal, 1)
+                                            .frame(alignment: .leading)
+
+                                    }
+                                    
+                                    VStack {
+                                        Text("VS")
+                                            .font(.system(size: 12, weight: .semibold))
+                                    }.frame(width: 20, height: 20, alignment: .center)
+                                    
+                                    VStack {
+                                        RemoteImage(imageUrl: match.awayTeam.logo,width: 80, height: 80)
+                                        Text("\(match.stats.awayScore)")
+                                            .font(.system(size: 18, weight: .semibold))
+                                            .padding(.horizontal, 1)
+                                            .frame(alignment: .trailing)
+                                    }
+                                }
+                                HStack {
+                                    Spacer()
+                                }
+                                Spacer()
+                                //                                HStack{
+                                //                                    Text("\(match.homeTeam.nameToShow) -").font(.system(size: 12, weight: .semibold))
+                                //                                    Text("\(match.stats.homeScore)").font(.system(size: 14, weight: .semibold))
+                                //                                }.padding(.horizontal, 12)
+                                //                                Text("x").font(.system(size: 12, weight: .semibold)).padding(.horizontal,12)
+                                //                                HStack{
+                                //                                    Text("\(match.awayTeam.nameToShow) -").font(.system(size: 12, weight: .semibold))
+                                //                                    Text("\(match.stats.awayScore)").font(.system(size: 14, weight: .semibold))
+                                //                                }.padding(.horizontal, 12).padding(.bottom,8)
+                                HStack{
+                                    Text("\(match.venue.name)").lineLimit(3).font(.system(size: 10, weight: .semibold)).padding(.leading, 8)
+                                    Spacer()
+                                    Text("\(match.matchStartTime)").frame(alignment: .trailing).padding(.trailing,4)
+                                }
+                            }
+                            .frame(width: 160, height: 160)
                             .background(Color.gray)
                             .cornerRadius(5)
                             .shadow(color: .gray, radius: 4, x: 0, y: 2)
                             .padding(.bottom)
+                        }
+                    }.padding(.horizontal)
+                }
+            }.onAppear {
+                //isLoading = true
+                MatchesService.shared.getAllMatchesOfADate(fatherId: LeagueEnum.Brasileirao, matchDate: Calendar.current.date(byAdding: .day, value: -2, to: Date())!) { result in
+                    //isLoading = false
+                    switch result {
+                    case .success(let matches):
+                        self.matches = matches
+                    case .failure(let error):
+                        print(error.localizedDescription)
                     }
-                }.padding(.horizontal)
+                }
             }
         }
     }

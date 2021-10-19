@@ -107,7 +107,7 @@ extension Endpoint {
     }
     
     
-    static func matches(seasonId id: Int, dateFrom: String = "2021-09-01",dateTo: String = "2021-09-20") -> Self {
+    static func matches(seasonId id: Int, dateFrom: String = "2021-09-01",dateTo: String = "2021-09-21") -> Self {
         return Endpoint(path: "api/v1/soccer/matches",
                         queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key),
                                       URLQueryItem(name: "season_id", value: String(id)),
@@ -119,7 +119,7 @@ extension Endpoint {
     }
     
     
-    static func matche(matchId id: Int, dateFrom: String = "2021-01-01") -> Self {
+    static func matche(matchId id: Int, dateFrom: String = "2021-04-01") -> Self {
         return Endpoint(path: "api/v1/soccer/matches/\(id)",
                         queryItems: [ URLQueryItem(name: "apikey", value: sportDataApi.key)],
                         method: "GET",

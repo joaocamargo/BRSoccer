@@ -19,6 +19,11 @@
 		055B886A2709E0CD00615827 /* Venue.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B88692709E0CD00615827 /* Venue.swift */; };
 		055B886C2709EBE700615827 /* MatchesService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B886B2709EBE700615827 /* MatchesService.swift */; };
 		055B886E2709EF5100615827 /* Array+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 055B886D2709EF5100615827 /* Array+Ext.swift */; };
+		0568A60E271E2E9F0043ACFF /* Date+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568A60D271E2E9F0043ACFF /* Date+Ext.swift */; };
+		0568A610271E3D540043ACFF /* String+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568A60F271E3D540043ACFF /* String+Ext.swift */; };
+		0568A612271E40A80043ACFF /* Formatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568A611271E40A80043ACFF /* Formatter+Ext.swift */; };
+		0568A614271E40D90043ACFF /* ISO8601DateFormatter+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568A613271E40D90043ACFF /* ISO8601DateFormatter+Ext.swift */; };
+		0568A616271E698A0043ACFF /* RemoteImage.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0568A615271E698A0043ACFF /* RemoteImage.swift */; };
 		057887BC270730BA00D2BF7D /* Config.json in Resources */ = {isa = PBXBuildFile; fileRef = 057887BB270730BA00D2BF7D /* Config.json */; };
 		057887C32707342700D2BF7D /* Data+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057887C12707342700D2BF7D /* Data+Ext.swift */; };
 		057887C42707342700D2BF7D /* URLSession+Ext.swift in Sources */ = {isa = PBXBuildFile; fileRef = 057887C22707342700D2BF7D /* URLSession+Ext.swift */; };
@@ -75,6 +80,11 @@
 		055B88692709E0CD00615827 /* Venue.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Venue.swift; sourceTree = "<group>"; };
 		055B886B2709EBE700615827 /* MatchesService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MatchesService.swift; sourceTree = "<group>"; };
 		055B886D2709EF5100615827 /* Array+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Array+Ext.swift"; sourceTree = "<group>"; };
+		0568A60D271E2E9F0043ACFF /* Date+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Date+Ext.swift"; sourceTree = "<group>"; };
+		0568A60F271E3D540043ACFF /* String+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "String+Ext.swift"; sourceTree = "<group>"; };
+		0568A611271E40A80043ACFF /* Formatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "Formatter+Ext.swift"; sourceTree = "<group>"; };
+		0568A613271E40D90043ACFF /* ISO8601DateFormatter+Ext.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "ISO8601DateFormatter+Ext.swift"; sourceTree = "<group>"; };
+		0568A615271E698A0043ACFF /* RemoteImage.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RemoteImage.swift; sourceTree = "<group>"; };
 		057887BB270730BA00D2BF7D /* Config.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = Config.json; sourceTree = "<group>"; };
 		057887C12707342700D2BF7D /* Data+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "Data+Ext.swift"; sourceTree = "<group>"; };
 		057887C22707342700D2BF7D /* URLSession+Ext.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = "URLSession+Ext.swift"; sourceTree = "<group>"; };
@@ -167,6 +177,7 @@
 			children = (
 				055B884727088BB700615827 /* ImageRoundedSymbols.swift */,
 				055B884927088BFD00615827 /* ImageRow.swift */,
+				0568A615271E698A0043ACFF /* RemoteImage.swift */,
 			);
 			path = Image;
 			sourceTree = "<group>";
@@ -178,6 +189,10 @@
 				057887C12707342700D2BF7D /* Data+Ext.swift */,
 				057887C22707342700D2BF7D /* URLSession+Ext.swift */,
 				055B886D2709EF5100615827 /* Array+Ext.swift */,
+				0568A60D271E2E9F0043ACFF /* Date+Ext.swift */,
+				0568A60F271E3D540043ACFF /* String+Ext.swift */,
+				0568A611271E40A80043ACFF /* Formatter+Ext.swift */,
+				0568A613271E40D90043ACFF /* ISO8601DateFormatter+Ext.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -419,12 +434,14 @@
 			files = (
 				057887D12707348400D2BF7D /* SeasonService.swift in Sources */,
 				057887D02707348400D2BF7D /* BaseServiceProtocol.swift in Sources */,
+				0568A60E271E2E9F0043ACFF /* Date+Ext.swift in Sources */,
 				055B883927087D8300615827 /* Team.swift in Sources */,
 				057887C32707342700D2BF7D /* Data+Ext.swift in Sources */,
 				055B884827088BB700615827 /* ImageRoundedSymbols.swift in Sources */,
 				057887E4270735D500D2BF7D /* ApiResult.swift in Sources */,
 				05794AA7270727A8006CEEF5 /* ContentView.swift in Sources */,
 				057887C92707346C00D2BF7D /* Config.swift in Sources */,
+				0568A612271E40A80043ACFF /* Formatter+Ext.swift in Sources */,
 				055B886C2709EBE700615827 /* MatchesService.swift in Sources */,
 				057887C42707342700D2BF7D /* URLSession+Ext.swift in Sources */,
 				055B88662709DE6200615827 /* Match.swift in Sources */,
@@ -434,9 +451,11 @@
 				055B883D27087EC500615827 /* TeamService.swift in Sources */,
 				057887D92707349600D2BF7D /* SportDataApi.swift in Sources */,
 				057887D32707348400D2BF7D /* ConfigService.swift in Sources */,
+				0568A614271E40D90043ACFF /* ISO8601DateFormatter+Ext.swift in Sources */,
 				057887D22707348400D2BF7D /* StagesService.swift in Sources */,
 				055B886A2709E0CD00615827 /* Venue.swift in Sources */,
 				055B88412708863600615827 /* RemoteImageURL.swift in Sources */,
+				0568A616271E698A0043ACFF /* RemoteImage.swift in Sources */,
 				057887E2270735D500D2BF7D /* Stage.swift in Sources */,
 				055B88682709DEA300615827 /* Stats.swift in Sources */,
 				057887E1270735D500D2BF7D /* Query.swift in Sources */,
@@ -446,6 +465,7 @@
 				055B883F2708846600615827 /* ImageService.swift in Sources */,
 				055B886E2709EF5100615827 /* Array+Ext.swift in Sources */,
 				057887E0270735D500D2BF7D /* Season.swift in Sources */,
+				0568A610271E3D540043ACFF /* String+Ext.swift in Sources */,
 				05794AA5270727A8006CEEF5 /* BRSoccerApp.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

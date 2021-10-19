@@ -52,4 +52,37 @@ class MatchesService : BaseServiceProtocol {
             completed(.success(resultObjects))
         }
     }
+    
+    func getAllMatchesOfADate(fatherId id: Int, matchDate: Date,using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
+        //print(Endpoint.leagues(countryId: id).url)
+        
+        let matchDateString = matchDate.converToYearMonthDateFormat()
+        let matchDateEndString = matchDate.addDays(numberOfDays: 1).converToYearMonthDateFormat()
+        
+        SeasonService.shared.getAll(fatherId: LeagueEnum.Brasileirao) { result in
+            switch result{
+            case .success(let seasons):
+                guard let season =  (seasons.first { $0.isCurrent == 1}) else { return }
+                
+                session.request(endpoint: .matches(seasonId: season.id,dateFrom: matchDateString, dateTo: matchDateEndString)) {  data, response, error in
+                    guard let response = response as? HTTPURLResponse, response.statusCode == 200 else {
+                        completed(.failure(.invalidResponse))
+                        return
+                    }
+                    
+                    guard let data = data else { return }
+                    guard let decodedValue = try? self.decodeJsonErrors(ApiResultsAsArray<T>.self, data) else {
+                        completed(.failure(.invalidData))
+                        return
+                    }
+                    
+                    let resultObjects = decodedValue.data.map { $0 }
+                    completed(.success(resultObjects))
+                }
+            case .failure(let error):
+                print(error.localizedDescription)
+                //agora tenho todas a season, com a season eu posso chegar nos jogos
+            }
+        }
+    }
 }

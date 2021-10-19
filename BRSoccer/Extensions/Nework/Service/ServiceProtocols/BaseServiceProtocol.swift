@@ -7,6 +7,19 @@
 
 import Foundation
 
+extension JSONDecoder.DateDecodingStrategy {
+    static let iso8601withFractionalSeconds = custom {
+        let container = try $0.singleValueContainer()
+        let string = try container.decode(String.self)
+        guard let date = Formatter.iso8601withFractionalSeconds.date(from: string) else {
+            throw DecodingError.dataCorruptedError(in: container,
+                  debugDescription: "Invalid date: " + string)
+        }
+        return date
+    }
+}
+
+
 protocol BaseServiceProtocol {
       
     associatedtype T:Codable
@@ -22,6 +35,7 @@ extension BaseServiceProtocol {
     func decodeJsonErrors<T:Codable>(_ type: T.Type, _ valueToDecode: Data) throws -> T {
         var result: T
         let decoder = JSONDecoder()
+        decoder.dateDecodingStrategy = .iso8601withFractionalSeconds
         
         do {
             result = try decoder.decode(type.self, from: valueToDecode)
@@ -43,3 +57,5 @@ extension BaseServiceProtocol {
         return try decoder.decode(type.self, from: Data())
     }
 }
+
+

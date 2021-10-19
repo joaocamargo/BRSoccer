@@ -16,16 +16,28 @@ struct Match: Codable, Identifiable {
     let matchID, statusCode: Int
     let status: String
     let matchStart: String
+    let matchStartIso: String
     let leagueID, seasonID: Int
     let homeTeam, awayTeam: Team
     let stats: Stats
     let venue: Venue
+    
+    
+    var matchStartTime : String {
+        let rfc3339Formatter = DateFormatter()
+        rfc3339Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        rfc3339Formatter.locale = Locale(identifier: "pt_BR")
+        let date = rfc3339Formatter.date(from: matchStartIso)
+        return date != nil ? date!.converToHourAndMinutes() : "ERROR"
+    }
 
-    enum CodingKeys: String, CodingKey {
+   
+   enum CodingKeys: String, CodingKey {
         case matchID = "match_id"
         case statusCode = "status_code"
         case status
         case matchStart = "match_start"
+        case matchStartIso = "match_start_iso"
         case leagueID = "league_id"
         case seasonID = "season_id"
         case homeTeam = "home_team"

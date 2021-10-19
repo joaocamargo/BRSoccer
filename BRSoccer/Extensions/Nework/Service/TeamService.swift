@@ -6,6 +6,7 @@
 //
 
 import Foundation
+import SwiftUI
 
 class TeamService: BaseServiceProtocol {
     
@@ -49,6 +50,19 @@ class TeamService: BaseServiceProtocol {
         }
     }
     
+//    func getBrasilianFirstDivisionTeamsForced(using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
+//        SeasonService.shared.getAll(fatherId: LeagueEnum.Brasileirao) { result in
+//            switch result{
+//            case .success(let seasons):
+//                guard let season =  (seasons.first { $0.isCurrent == 1}) else { return }
+//
+//            case .failure(let failure):
+//                completed(.failure(failure))
+//            }
+//        }
+//        //  [8204,8278,12481,12476,12477,12487,8212,12486,8205,8199,8214,8208,8267,8223,12488,12479,8266,12490,8207,8231]
+//
+//    }
     
     func getBrasilianFirstDivisionTeams(using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
         
@@ -57,7 +71,7 @@ class TeamService: BaseServiceProtocol {
             case .success(let seasons):
                 guard let season =  (seasons.first { $0.isCurrent == 1}) else { return }
                 //agora tenho todas a season, com a season eu posso chegar nos jogos
-
+                
                 MatchesService.shared.getAll(fatherId: season.id) { resultMatches in
                     switch resultMatches {
                     case .success(let matches):
@@ -65,7 +79,7 @@ class TeamService: BaseServiceProtocol {
                         let allTeamsFirstLeague = matches.map { $0.homeTeam }
                         
                         let uniqueTeamsFirstLeague = allTeamsFirstLeague.unique(map: { $0.id })
-     
+                        
                         completed(.success(uniqueTeamsFirstLeague))
                         
                         
