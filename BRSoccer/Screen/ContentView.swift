@@ -114,14 +114,14 @@ struct UndergoingMatchesView: View {
                                 .padding(.horizontal,10)
                                 
                                 HStack(alignment: . lastTextBaseline){
-                                    Text("\(match.venue.name)").frame(width: 90, alignment: .bottomLeading).lineLimit(3).font(.system(size: 12, weight: .medium))//.padding(.leading, 8)
+                                    Text("\(match.venue.name)").frame(width: 100, alignment: .bottomLeading).lineLimit(3).font(.system(size: 12, weight: .medium))//.padding(.leading, 8)
                                     //Spacer()
                                     Text("\(match.matchStartDateTime)").frame(alignment: .trailing).frame(width: 60)//.padding(.trailing,4)
                                 }.font(.system(size: 14, weight: .bold)).foregroundColor(.black)//.shadow(color: .black, radius: 1)
                                 //.background(Color(.yellow))
                                     .padding(.horizontal, 5).padding(.bottom,5).padding(.top,1)
                             }
-                            .frame(width: 180)
+                            .frame(width: 180,height: 190)
                             .background(Color.yellow)
                             .cornerRadius(5)
                             //.shadow(color: .gray, radius: 4, x: 0, y: 2)
