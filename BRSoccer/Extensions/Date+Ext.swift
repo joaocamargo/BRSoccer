@@ -26,6 +26,12 @@ extension Date {
         return dateFormatter.string(from: self)
     }
     
+    func converToDateTimeHourAndMinutes() -> String {
+        let dateFormatter = DateFormatter()
+        dateFormatter.dateFormat = "dd/MM HH:mm"
+        return dateFormatter.string(from: self)
+    }
+    
     func converToYearMonthDateFormat() -> String {
         let dateFormatter = DateFormatter()
         dateFormatter.dateFormat = "yyyy-MM-dd"

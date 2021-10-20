@@ -56,8 +56,8 @@ class MatchesService : BaseServiceProtocol {
     func getAllMatchesOfADate(fatherId id: Int, matchDate: Date,using session: URLSession = .shared, completed: @escaping (Result<[T], CustomErrors>) -> Void) {
         //print(Endpoint.leagues(countryId: id).url)
         
-        let matchDateString = matchDate.converToYearMonthDateFormat()
-        let matchDateEndString = matchDate.addDays(numberOfDays: 1).converToYearMonthDateFormat()
+        let matchDateString = matchDate.addDays(numberOfDays: 0).converToYearMonthDateFormat()
+        let matchDateEndString = Date().converToYearMonthDateFormat() // matchDate.addDays(numberOfDays: 0).converToYearMonthDateFormat()
         
         SeasonService.shared.getAll(fatherId: LeagueEnum.Brasileirao) { result in
             switch result{

@@ -85,62 +85,53 @@ struct UndergoingMatchesView: View {
             ScrollView(.horizontal) {
                 if matches.count > 0 {
                     HStack(spacing: 8) {
-                        ForEach(matches) { match in
+                        ForEach(matches.sorted(by: { $0.matchDate < $1.matchDate})) { match in
                             VStack(alignment: .center){
                                 
                                 HStack(alignment: .center,spacing: 0) {
                                     VStack {
                                         RemoteImage(imageUrl: match.homeTeam.logo,width: 80, height: 80)
                                         Text("\(match.stats.homeScore)")
-                                            .font(.system(size: 18, weight: .semibold))
+                                            .font(.system(size: 26, weight: .bold)).shadow(color: .black, radius: 1)
                                             .padding(.horizontal, 1)
                                             .frame(alignment: .leading)
 
                                     }
                                     
                                     VStack {
-                                        Text("VS")
-                                            .font(.system(size: 12, weight: .semibold))
+                                        Text("VS").fixedSize(horizontal: true, vertical: false).font(.system(size: 16, weight: .semibold)).shadow(color: .black, radius: 1)
                                     }.frame(width: 20, height: 20, alignment: .center)
                                     
                                     VStack {
                                         RemoteImage(imageUrl: match.awayTeam.logo,width: 80, height: 80)
                                         Text("\(match.stats.awayScore)")
-                                            .font(.system(size: 18, weight: .semibold))
+                                            .font(.system(size: 26, weight: .bold)).shadow(color: .black, radius: 1)
                                             .padding(.horizontal, 1)
                                             .frame(alignment: .trailing)
                                     }
-                                }
-                                HStack {
-                                    Spacer()
-                                }
-                                Spacer()
-                                //                                HStack{
-                                //                                    Text("\(match.homeTeam.nameToShow) -").font(.system(size: 12, weight: .semibold))
-                                //                                    Text("\(match.stats.homeScore)").font(.system(size: 14, weight: .semibold))
-                                //                                }.padding(.horizontal, 12)
-                                //                                Text("x").font(.system(size: 12, weight: .semibold)).padding(.horizontal,12)
-                                //                                HStack{
-                                //                                    Text("\(match.awayTeam.nameToShow) -").font(.system(size: 12, weight: .semibold))
-                                //                                    Text("\(match.stats.awayScore)").font(.system(size: 14, weight: .semibold))
-                                //                                }.padding(.horizontal, 12).padding(.bottom,8)
-                                HStack{
-                                    Text("\(match.venue.name)").lineLimit(3).font(.system(size: 10, weight: .semibold)).padding(.leading, 8)
-                                    Spacer()
-                                    Text("\(match.matchStartTime)").frame(alignment: .trailing).padding(.trailing,4)
-                                }
+                                }//.padding(.bottom,10)
+                                    .background(Image("grass").resizable().scaledToFill().opacity(0.6))
+                                .padding(.horizontal,10)
+                                
+                                HStack(alignment: . lastTextBaseline){
+                                    Text("\(match.venue.name)").frame(width: 90, alignment: .bottomLeading).lineLimit(3).font(.system(size: 12, weight: .medium))//.padding(.leading, 8)
+                                    //Spacer()
+                                    Text("\(match.matchStartDateTime)").frame(alignment: .trailing).frame(width: 60)//.padding(.trailing,4)
+                                }.font(.system(size: 14, weight: .bold)).foregroundColor(.black)//.shadow(color: .black, radius: 1)
+                                //.background(Color(.yellow))
+                                    .padding(.horizontal, 5).padding(.bottom,5).padding(.top,1)
                             }
-                            .frame(width: 160, height: 160)
-                            .background(Color.gray)
+                            .frame(width: 180)
+                            .background(Color.yellow)
                             .cornerRadius(5)
-                            .shadow(color: .gray, radius: 4, x: 0, y: 2)
+                            //.shadow(color: .gray, radius: 4, x: 0, y: 2)
                             .padding(.bottom)
                         }
                     }.padding(.horizontal)
                 }
             }.onAppear {
                 //isLoading = true
-                MatchesService.shared.getAllMatchesOfADate(fatherId: LeagueEnum.Brasileirao, matchDate: Calendar.current.date(byAdding: .day, value: -2, to: Date())!) { result in
+                MatchesService.shared.getAllMatchesOfADate(fatherId: LeagueEnum.Brasileirao, matchDate: Calendar.current.date(byAdding: .day, value: -5, to: Date())!) { result in
                     //isLoading = false
                     switch result {
                     case .success(let matches):

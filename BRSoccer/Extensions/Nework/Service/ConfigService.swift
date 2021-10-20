@@ -18,7 +18,7 @@ class ConfigService {
                   let data = try Data(contentsOf: URL(fileURLWithPath: path), options: .mappedIfSafe)
                   let jsonResult = try JSONSerialization.jsonObject(with: data, options: .mutableLeaves)
                   
-                  if let jsonResult = jsonResult as? Dictionary<String, String>, let config = jsonResult["apiKey"] {
+                  if let jsonResult = jsonResult as? Dictionary<String, String>, let config = jsonResult["apiKey2"] {
                       return config
                   }
               } catch {

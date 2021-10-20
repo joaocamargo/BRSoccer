@@ -24,11 +24,27 @@ struct Match: Codable, Identifiable {
     
     
     var matchStartTime : String {
-        let rfc3339Formatter = DateFormatter()
-        rfc3339Formatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
-        rfc3339Formatter.locale = Locale(identifier: "pt_BR")
-        let date = rfc3339Formatter.date(from: matchStartIso)
+        let dateString = DateFormatter()
+        dateString.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateString.locale = Locale(identifier: "pt_BR")
+        let date = dateString.date(from: matchStartIso)
         return date != nil ? date!.converToHourAndMinutes() : "ERROR"
+    }
+    
+    var matchStartDateTime : String {
+        let dateString = DateFormatter()
+        dateString.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateString.locale = Locale(identifier: "pt_BR")
+        let date = dateString.date(from: matchStartIso)
+        return date != nil ? date!.converToDateTimeHourAndMinutes() : "ERROR"
+    }
+    
+    var matchDate: Date {
+        let dateString = DateFormatter()
+        dateString.dateFormat = "yyyy-MM-dd'T'HH:mm:ssZ"
+        dateString.locale = Locale(identifier: "pt_BR")
+        guard let refdate = dateString.date(from: matchStartIso) else { return Date().addDays(numberOfDays: -10)}
+        return refdate
     }
 
    
